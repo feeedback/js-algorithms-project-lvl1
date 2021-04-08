@@ -1,5 +1,5 @@
 import { test, expect } from '@jest/globals';
-import buildSearchEngine from '../src/search_parse_docs.js';
+import buildSearchEngine from '../src/index.js';
 
 // создание документа // документ имеет два атрибута "id" и "text"
 const doc1 = { id: 'doc1', text: "I can't shoot straight unless I've had a pint!" };
