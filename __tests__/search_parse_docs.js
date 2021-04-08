@@ -1,13 +1,5 @@
 import { test, expect } from '@jest/globals';
-// import { createFixturesFilePath } from '../src/utils.js';
-// import buildSearchEngine from '../src/index.js';
-
 import buildSearchEngine from '../src/search_parse_docs.js';
-
-// const filepathJsonA = createFixturesFilePath('json/file_deep1.json');
-// const filepathJsonB = createFixturesFilePath('json/file_deep2.json');
-// const filepathYamlA = createFixturesFilePath('yaml/file_deep1.yml');
-// const filepathYamlB = createFixturesFilePath('yaml/file_deep2.yml');
 
 // создание документа // документ имеет два атрибута "id" и "text"
 const doc1 = { id: 'doc1', text: "I can't shoot straight unless I've had a pint!" };
@@ -20,8 +12,12 @@ beforeEach(async () => {
   searchEngine = buildSearchEngine(docs); // поисковый движок запомнил документы
 });
 
-test('buildSearchEngine - simple search', () => {
-  expect(searchEngine.search('shoot')).toStrictEqual(['doc2', 'doc1']);
+test('searchEngine - simple search', () => {
+  expect(searchEngine.search('shoot')).toStrictEqual(['doc1', 'doc2']);
+});
+test('searchEngine - search word filtered from punctuation marks', () => {
   expect(searchEngine.search('pint')).toStrictEqual(searchEngine.search('pint!'));
+});
+test('searchEngine - search string. Result sorted by the number of occurrences of words', () => {
   expect(searchEngine.search('shoot at me')).toStrictEqual(['doc2', 'doc1']);
 });
