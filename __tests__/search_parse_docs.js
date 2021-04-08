@@ -23,4 +23,5 @@ beforeEach(async () => {
 test('buildSearchEngine - simple search', () => {
   expect(searchEngine.search('shoot')).toStrictEqual(['doc2', 'doc1']);
   expect(searchEngine.search('pint')).toStrictEqual(searchEngine.search('pint!'));
+  expect(searchEngine.search('shoot at me')).toStrictEqual(['doc2', 'doc1']);
 });

@@ -1,5 +1,22 @@
 import _ from 'lodash';
 
+const search = (mapWordsToDocsId) => (wordRaw) => {
+  const words = _.words(wordRaw);
+
+  const wordsIncludesInDocsId = words.map((word) => mapWordsToDocsId[word]);
+  const wordsExistInDocsId = wordsIncludesInDocsId.map((docId) => _.uniq(docId));
+
+  const mapDocIdByUniqWordCountInDocs = _.countBy(wordsExistInDocsId.flat());
+  const mapDocIdByWordCountInDocs = _.countBy(wordsIncludesInDocsId.flat());
+
+  const uniqDocsId = _.uniq(wordsIncludesInDocsId.flat());
+
+  return uniqDocsId.sort(
+    (a, b) => mapDocIdByUniqWordCountInDocs[b] - mapDocIdByUniqWordCountInDocs[a]
+      || mapDocIdByWordCountInDocs[b] - mapDocIdByWordCountInDocs[a],
+  );
+};
+
 export default (docs) => {
   const mapWordsToDocsId = {};
 
@@ -13,15 +30,5 @@ export default (docs) => {
     });
   });
 
-  return {
-    search: (wordRaw) => {
-      const [word] = _.words(wordRaw);
-
-      const docsId = mapWordsToDocsId[word];
-      const mapIdToFreq = _.countBy(docsId);
-
-      const result = _.uniq(docsId).sort((a, b) => mapIdToFreq[b] - mapIdToFreq[a]);
-      return result;
-    },
-  };
+  return { search: search(mapWordsToDocsId) };
 };
