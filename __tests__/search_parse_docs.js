@@ -21,6 +21,6 @@ beforeEach(async () => {
 });
 
 test('buildSearchEngine - simple search', () => {
-  expect(searchEngine.search('shoot')).toStrictEqual(['doc1', 'doc2']);
+  expect(searchEngine.search('shoot')).toStrictEqual(['doc2', 'doc1']);
   expect(searchEngine.search('pint')).toStrictEqual(searchEngine.search('pint!'));
 });

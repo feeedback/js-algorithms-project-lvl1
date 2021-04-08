@@ -4,9 +4,7 @@ export default (docs) => {
   const mapWordsToDocsId = {};
 
   docs.forEach(({ id, text }) => {
-    const docUniqWords = _.uniq(_.words(text));
-
-    docUniqWords.forEach((word) => {
+    _.words(text).forEach((word) => {
       if (mapWordsToDocsId[word]) {
         mapWordsToDocsId[word].push(id);
       } else {
@@ -19,20 +17,11 @@ export default (docs) => {
     search: (wordRaw) => {
       const [word] = _.words(wordRaw);
 
-      return mapWordsToDocsId[word];
+      const docsId = mapWordsToDocsId[word];
+      const mapIdToFreq = _.countBy(docsId);
+
+      const result = _.uniq(docsId).sort((a, b) => mapIdToFreq[b] - mapIdToFreq[a]);
+      return result;
     },
   };
 };
-
-// const mapWordsToDocsId = docs.reduce((acc, { id, text }) => {
-//   const docUniqWords = _.uniq(_.words(text));
-
-//   docUniqWords.forEach((word) => {
-//     if (acc[word]) {
-//       acc[word].push(id);
-//     } else {
-//       acc[word] = [id];
-//     }
-//   });
-//   return acc;
-// }, {});
