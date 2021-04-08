@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 const search = (mapWordsToDocsId, mapDocIdToWordsCount, docsCount) => (wordRaw) => {
   const words = _.words(wordRaw);
-  const wordsIncludesInDocsId = words.map((word) => mapWordsToDocsId[word]);
+  const wordsIncludesInDocsId = words.map((word) => mapWordsToDocsId[word] || []);
   const wordsExistInDocsId = wordsIncludesInDocsId.map((docId) => _.uniq(docId));
 
   const mapDocIdToUniqWordCountInDocs = _.countBy(wordsExistInDocsId.flat());
@@ -26,10 +26,11 @@ const search = (mapWordsToDocsId, mapDocIdToWordsCount, docsCount) => (wordRaw) 
 };
 
 export default (docs) => {
-  const mapWordsToDocsId = {};
   const mapDocIdToWordsCount = docs
     .reduce((acc, { id, text }) => ({ ...acc, [id]: _.words(text).length }), {});
   const docsCount = docs.length;
+
+  const mapWordsToDocsId = {};
 
   docs.forEach(({ id, text }) => {
     _.words(text).forEach((word) => {

@@ -12,12 +12,15 @@ beforeEach(async () => {
   searchEngine = buildSearchEngine(docs); // поисковый движок запомнил документы
 });
 
-test('searchEngine - simple search', () => {
+test('search word non exist', () => {
+  expect(searchEngine.search('nerd')).toStrictEqual([]);
+});
+test('search word', () => {
   expect(searchEngine.search('shoot')).toStrictEqual(['doc1', 'doc2']);
 });
-test('searchEngine - search word filtered from punctuation marks', () => {
+test('search word filtered from punctuation marks', () => {
   expect(searchEngine.search('pint')).toStrictEqual(searchEngine.search('pint!'));
 });
-test('searchEngine - search string. Result sorted by the number of occurrences of words', () => {
+test('search string. Result sorted by the number of occurrences of words', () => {
   expect(searchEngine.search('shoot at me')).toStrictEqual(['doc2', 'doc1']);
 });
