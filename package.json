@@ -1,19 +1,19 @@
 {
   "name": "@hexlet/code",
   "version": "1.0.0",
-  "description": "[![Actions Status](https://github.com/feeedback/backend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/feeedback/backend-project-lvl2/actions)",
+  "description": "",
   "main": "src/index.js",
   "scripts": {
     "test": "npx jest"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/feeedback/backend-project-lvl2.git"
+    "url": "git+https://github.com/feeedback/js-algorithms-project-lvl1.git"
   },
   "author": "Alexander Rzhanitsyn",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/feeedback/backend-project-lvl2/issues"
+    "url": "https://github.com/feeedback/js-algorithms-project-lvl1/issues"
   },
   "engines": {
     "node": ">=14"
@@ -23,7 +23,7 @@
     "testEnvironment": "node",
     "transform": {}
   },
-  "homepage": "https://github.com/feeedback/backend-project-lvl2#readme",
+  "homepage": "https://github.com/feeedback/js-algorithms-project-lvl1#readme",
   "dependencies": {
     "debug": "^4.3.1",
     "lodash": "^4.17.21"
