@@ -13,7 +13,7 @@
 
 _Пример использования:_
 
-```
+```js
 import buildSearchEngine from '@hexlet-code';
 
 const doc1 = { id: 'doc1', text: "I can't shoot straight unless I've had a pint!" };
