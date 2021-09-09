@@ -13,7 +13,7 @@ const search = (mapWordsToDocsId, mapDocIdToWordsCount, docsCount) => (wordRaw) 
   const getTfIdf = (word) => {
     const tf = mapDocIdToWordCountInDocs[word] / mapDocIdToWordsCount[word];
 
-    const docsCountIncludesThisWord = (mapWordsToDocsId[word]?.length || 0);
+    const docsCountIncludesThisWord = mapWordsToDocsId[word]?.length || 0;
     const idf = Math.log10(docsCount / docsCountIncludesThisWord);
 
     return tf * idf;
@@ -26,8 +26,10 @@ const search = (mapWordsToDocsId, mapDocIdToWordsCount, docsCount) => (wordRaw) 
 };
 
 export default (docs) => {
-  const mapDocIdToWordsCount = docs
-    .reduce((acc, { id, text }) => ({ ...acc, [id]: _.words(text).length }), {});
+  const mapDocIdToWordsCount = docs.reduce(
+    (acc, { id, text }) => ({ ...acc, [id]: _.words(text).length }),
+    {},
+  );
   const docsCount = docs.length;
 
   const mapWordsToDocsId = {};
